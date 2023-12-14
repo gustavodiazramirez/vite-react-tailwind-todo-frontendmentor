@@ -14,7 +14,7 @@ const App = () => {
               todo
             </h1>
             <button>
-              <MoonIcon className='fill-red-400' />
+              <MoonIcon className='fill-wihte-400' />
             </button>
           </div>
           <form className="bg-white rounded-md overflow-hidden py-4 px-4 flex gap-4 items-center">
