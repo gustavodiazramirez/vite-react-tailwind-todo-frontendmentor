@@ -19,7 +19,7 @@ const initialStateDarkMode = localStorage.getItem('theme') === 'dark';
   },[darkMode])
   const handleClickToggleTheme = () => {}
   return (
-    <header className="container mx-auto px-4 pt-8">
+    <header className="container mx-auto px-4 pt-8 md:max-w-xl">
       <div className="flex justify-between mb-8">
         <h1 className="text-3xl uppercase text-white tracking-[10px] font-bold">
           todo
