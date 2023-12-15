@@ -1,19 +1,13 @@
 import React from 'react'
-import CrossIcon from "../components/icons/cross-icon";
+import TodoItem from '../components/TodoItem'
 
-// Update and Delete
-
-export const TodoList = () => {
+export const TodoList = ({todos, removeTodo, updateTodo}) => {
   return (
-    <article className="flex py-4 gap-4 border-b border-b-gray-400  px-4">
-      <button className="rounded-full border-2 inline-block h-5 w-5 "></button>
-      <p className="grow first-letter:text-gray-600 text-xs">
-        Complete online Javascript curse in Bluuweb
-      </p>
-      <button>
-        <CrossIcon />
-      </button>
-    </article>
+    <div className="bg-white mt-8 rounded-t-md px-4">
+        {todos.map((todo) => (
+            <TodoItem key={todo.id} todo={todo} removeTodo={removeTodo} updateTodo={updateTodo}/>
+        ))}
+    </div>
   )
 }
 export default TodoList;
