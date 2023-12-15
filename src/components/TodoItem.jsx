@@ -4,11 +4,11 @@ import IconCheck from './icons/check-icon'
 
 // Update and Delete
 
-export const TodoItem = ({ todo, removeTodo, updateTodo }) => {
-  const { id, title, completed } = todo
+export const TodoItem = React.forwardRef(({ todo, removeTodo, updateTodo, ...props }, ref) => {
+  const { id, title, completed } = todo;
 
   return (
-    <article className="transition-all duration-1000 flex py-4 gap-4 border-b border-b-gray-40">
+    <article {...props} ref={ref} className="transition-all duration-1000 flex py-4 gap-4 border-b border-b-gray-40">
       <button
         className={`${
           completed
@@ -33,5 +33,5 @@ export const TodoItem = ({ todo, removeTodo, updateTodo }) => {
       </button>
     </article>
   )
-}
+})
 export default TodoItem

@@ -1,23 +1,49 @@
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
-import TodoCreate from "./components/TodoCreate";
 import TodoComputed from "./components/TodoComputed";
+import TodoCreate from "./components/TodoCreate";
 import TodoFilter from "./components/TodoFilter";
 import TodoList from "./components/TodoList";
-import { useEffect, useState } from "react";
+import { DragDropContext } from "@hello-pangea/dnd";
+const initialStateTodos = JSON.parse(localStorage.getItem("todos")) || [];
 
-const initialStateTodos = JSON.parse(localStorage.getItem('todos')) || [];
+//https://github.com/ymulenll/react-beautiful-dnd-demo/blob/master/src/App.js
+const reorder = (list, startIndex, endIndex) => {
+    const result = [...list];
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+};
 
 const App = () => {
     const [todos, setTodos] = useState(initialStateTodos);
+
     useEffect(() => {
         localStorage.setItem("todos", JSON.stringify(todos));
     }, [todos]);
+
+    const handleDragEnd = (result) => {
+        const { destination, source } = result;
+        if (!destination) return;
+        if (
+            source.index === destination.index &&
+            source.droppableId === destination.droppableId
+        )
+            return;
+
+        setTodos((prevTasks) =>
+            reorder(prevTasks, source.index, destination.index)
+        );
+    };
+
     const createTodo = (title) => {
         const newTodo = {
-            id: Date.now(),
+            id: `${Date.now()}`,
             title: title.trim(),
             completed: false,
         };
+
         setTodos([...todos, newTodo]);
     };
 
@@ -43,7 +69,7 @@ const App = () => {
 
     const changeFilter = (filter) => setFilter(filter);
 
-    const filtersTodo = () => {
+    const filteredTodos = () => {
         switch (filter) {
             case "all":
                 return todos;
@@ -51,7 +77,6 @@ const App = () => {
                 return todos.filter((todo) => !todo.completed);
             case "completed":
                 return todos.filter((todo) => todo.completed);
-
             default:
                 return todos;
         }
@@ -64,24 +89,32 @@ const App = () => {
             <Header />
 
             <main className="container mx-auto mt-8 px-4 md:max-w-xl">
-                <TodoCreate createTodo={createTodo} />
-                <TodoList
-                    todos={filtersTodo()}
-                    removeTodo={removeTodo}
-                    updateTodo={updateTodo}
-                />
-                <TodoComputed
-                    computedItemsLeft={computedItemsLeft}
-                    clearCompleted={clearCompleted}
-                />
-                <TodoFilter changeFilter={changeFilter} filter={filter} />
-            </main>
+            <TodoCreate createTodo={createTodo} />
 
-            <footer className="mt-10 text-center transition-all duration-1000 dark:text-gray-500">
-                Created by Gustavo Díaz
-            </footer>
-        </div>
-    );
+{todos.length > 0 ? (
+    <TodoList
+        todos={filteredTodos()}
+        removeTodo={removeTodo}
+        updateTodo={updateTodo}
+        handleDragEnd={handleDragEnd}
+    />
+) : (
+    <p>Cargando...</p>
+)}
+
+<TodoComputed
+    computedItemsLeft={computedItemsLeft}
+    clearCompleted={clearCompleted}
+/>
+
+<TodoFilter changeFilter={changeFilter} filter={filter} />
+</main>
+
+<footer className="mt-8 text-center dark:text-gray-400">
+Drag and drop to reorder list
+</footer>
+</div>
+);
 };
 
 export default App;
