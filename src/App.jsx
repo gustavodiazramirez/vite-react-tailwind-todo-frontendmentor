@@ -99,7 +99,7 @@ const App = () => {
         handleDragEnd={handleDragEnd}
     />
 ) : (
-    <p>Cargando...</p>
+    <p></p>
 )}
 
 <TodoComputed
