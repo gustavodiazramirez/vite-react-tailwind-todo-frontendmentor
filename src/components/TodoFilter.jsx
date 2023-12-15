@@ -2,8 +2,8 @@ import React from 'react'
 
 export const TodoFilter = ({ changeFilter, filter}) => {
   return (
-    <section className="container mx-auto px-4">
-      <div className="bg-white mt-8 p-4 rounded-md flex justify-center gap-4 font-semibold">
+    <section className="transition-all duration-1000 container mx-auto mt-8 dark:bg-gray-800">
+      <div className="bg-white mt-8 p-4 rounded-md flex justify-center gap-4 font-semibold dark:bg-gray-800 transition-all duration-1000 ">
         <button className= {`${filter == 'all' ? " text-blue-500" : 'hover:text-blue-400 text-gray-500'}`} onClick={() => changeFilter('all')}>
           All
         </button>

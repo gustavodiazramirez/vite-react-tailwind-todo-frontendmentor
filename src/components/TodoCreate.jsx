@@ -18,12 +18,12 @@ export const TodoCreate = ({createTodo}) => {
   return (
     <form 
     onSubmit={handleSubmitAddTodo} 
-    className="bg-white rounded-md overflow-hidden py-4 px-4 flex gap-4 items-center">
+    className="bg-white rounded-md overflow-hidden py-4 px-4 flex gap-4 items-center dark:bg-gray-800 transition-all duration-1000 ">
     <span className="rounded-full border-2 inline-block h-4 w-4 "></span>
     <input
       type="text"
       placeholder="Create a new todo..."
-      className="w-full text-gray-400 outline-none text-xs"
+      className="transition-all duration-1000 w-full text-gray-400 outline-none text-xs dark:bg-gray-800"
       value={title}
       onChange={(evento) => setTitle(evento.target.value)}
     />

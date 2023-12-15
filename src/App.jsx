@@ -6,10 +6,6 @@ import TodoList from './components/TodoList'
 import { useState } from 'react'
 
 const initialStateTodos = [
-  { id: 1, title: 'Complete Online Js BlueeWeb Curse', completed: true },
-  { id: 2, title: 'Go to Gym', completed: false },
-  { id: 3, title: 'Pick up Groseries', completed: false },
-  { id: 4, title: 'Complete Frontend Mentor', completed: false },
 ]
 
 const App = () => {
@@ -61,7 +57,7 @@ const App = () => {
   }
 
   return (
-    <div className=" bg-contain bg-no-repeat bg-[url('./assets/images/bg-mobile-light.jpg')] bg-gray-300 min-h-screen">
+    <div className="transition-all duration-1000 bg-contain bg-no-repeat bg-[url('./assets/images/bg-mobile-light.jpg')] dark:bg-[url('./assets/images/bg-mobile-dark.jpg')] bg-gray-300 min-h-screen dark:bg-gray-950">
       <Header />
 
       <main className="container mx-auto px-4 mt-8">
@@ -78,8 +74,8 @@ const App = () => {
         <TodoFilter changeFilter={changeFilter} filter={filter}/>
       </main>
 
-      <footer className="text-center mt-10">
-        Drag and drop to reorder list
+      <footer className="transition-all duration-1000 text-center mt-10 dark:text-gray-500">
+        Created by Gustavo Díaz
       </footer>
     </div>
   )
